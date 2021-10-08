@@ -2,11 +2,27 @@ plugins {
 	id 'org.springframework.boot' version '2.5.5'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
+	id 'jacoco'
 }
 
+apply plugin: 'jacoco'
 group = 'com.peigo.wallet.ms'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
+
+jacoco {
+	toolVersion = "0.8.7"
+	reportsDirectory = layout.buildDirectory.dir('customJacocoReportDir')
+}
+
+jacocoTestReport{
+	reports {
+		xml.enabled true
+		html.enabled true
+		csv.enabled true
+		html.outputLocation = layout.buildDirectory.dir('jacocoHtml')
+	}
+}
 
 configurations {
 	compileOnly {
@@ -23,8 +39,16 @@ dependencies {
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	implementation 'org.springdoc:springdoc-openapi-ui:1.5.11'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	implementation 'com.amazonaws:aws-java-sdk-dynamodb:1.12.83'
+	implementation 'com.github.derjust:spring-data-dynamodb:5.1.0'
 }
 
 test {
 	useJUnitPlatform()
+	jacoco {
+		destinationFile = layout.buildDirectory.file('jacoco/jacocoTest.exec').get().asFile
+		classDumpDir = layout.buildDirectory.dir('jacoco/classpathdumps').get().asFile
+	}
 }
