@@ -9,12 +9,13 @@ import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapperConfig;
+import com.peigo.wallet.ms.boilerplate.constants.DynamoDBConstant;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class DynamoDB {
+public class DynamoDBConfig {
 
     @Value("${aws.dynamodb.secret-key:}")
     private String secretKey;
@@ -28,7 +29,7 @@ public class DynamoDB {
     @Value("${Spring.profiles.active:}")
     private String profile;
 
-    //@Bean
+    @Bean
     public DynamoDBMapper mapper(){
         return new DynamoDBMapper(amazonDynamoDB(), dynamoDBMapperConfig());
     }
@@ -36,7 +37,7 @@ public class DynamoDB {
     private DynamoDBMapperConfig dynamoDBMapperConfig(){
         return DynamoDBMapperConfig
                 .builder()
-                .withTableNameOverride(DynamoDBMapperConfig.TableNameOverride.withTableNameReplacement(""))
+                .withTableNameOverride(DynamoDBMapperConfig.TableNameOverride.withTableNameReplacement(DynamoDBConstant.TABLE_NAME))
                 .build();
     }
 

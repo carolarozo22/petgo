@@ -1,13 +1,13 @@
 package com.peigo.wallet.ms.boilerplate.service;
 
 
-import com.peigo.wallet.ms.boilerplate.dto.request.User;
+import com.peigo.wallet.ms.boilerplate.dto.request.UserDTO;
 
 import java.util.List;
 
 public interface IUserService {
 
-    User saveUser(User user);
+    UserDTO saveUser(UserDTO userDTO);
 
-    List<User> getUsers();
+    List<UserDTO> getUsers();
 }

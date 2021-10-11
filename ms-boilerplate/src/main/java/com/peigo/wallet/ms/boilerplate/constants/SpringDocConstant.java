@@ -1,6 +1,6 @@
 package com.peigo.wallet.ms.boilerplate.constants;
 
-public class SpringDoc {
+public class SpringDocConstant {
 
     /**
      * Variables de configuración
@@ -18,7 +18,6 @@ public class SpringDoc {
     /**
      * Variables del controlador
      */
-    public static final String CONTROLLER_USER_CREATE_USER_PATH = "/createUser";
     public static final String CONTROLLER_USER_CREATE_USER_SUMMARY = "Metodo que registra usuario";
     public static final String CONTROLLER_USER_DESCRIPTION_200 = "Respuesta exitosa";
     public static final String CONTROLLER_USER_DESCRIPTION_404 = "Usuario no encontrado";

@@ -1,6 +1,8 @@
 package com.peigo.wallet.ms.boilerplate.controller;
 
-import com.peigo.wallet.ms.boilerplate.dto.request.User;
+import com.peigo.wallet.ms.boilerplate.dto.request.UserDTO;
+import com.peigo.wallet.ms.boilerplate.service.IUserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -14,14 +16,18 @@ import java.util.Map;
 
 @RestController
 public class UsersControllerImpl implements IUsersController{
+
+    @Autowired
+    private IUserService userServiceImpl;
+
     @Override
-    public ResponseEntity createUser(User user) {
-        return null;
+    public ResponseEntity createUser(UserDTO userDTO) {
+        return ResponseEntity.ok(userServiceImpl.saveUser(userDTO));
     }
 
     @Override
     public ResponseEntity getFindUser() {
-        return null;
+        return ResponseEntity.ok(userServiceImpl.getUsers());
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
