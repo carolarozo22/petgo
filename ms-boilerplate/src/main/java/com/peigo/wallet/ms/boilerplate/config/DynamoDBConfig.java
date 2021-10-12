@@ -37,7 +37,7 @@ public class DynamoDBConfig {
     private DynamoDBMapperConfig dynamoDBMapperConfig(){
         return DynamoDBMapperConfig
                 .builder()
-                .withTableNameOverride(DynamoDBMapperConfig.TableNameOverride.withTableNameReplacement(DynamoDBConstant.TABLE_NAME))
+                .withTableNameOverride(DynamoDBMapperConfig.TableNameOverride.withTableNameReplacement(DynamoDBConstant.USER_TABLE_NAME))
                 .build();
     }
 

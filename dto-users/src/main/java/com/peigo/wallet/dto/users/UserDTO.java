@@ -1,7 +1,8 @@
-package com.peigo.wallet.ms.boilerplate.dto;
+package com.peigo.wallet.dto.users;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.peigo.wallet.ms.boilerplate.constants.SpringDocConstant;
+import com.peigo.wallet.dto.users.constants.DTOConstant;
+import com.peigo.wallet.dto.users.constants.SpringDocConstant;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 import lombok.Data;
@@ -18,14 +19,14 @@ public class UserDTO implements Serializable {
 
     @NotEmpty(message = SpringDocConstant.DTO_USER_MESSAGE_NAME)
     @Schema(description = SpringDocConstant.DTO_USER_SCHEMA_NAME_DESCRIPTION, required = true, example = SpringDocConstant.DTO_USER_SCHEMA_NAME_EXAMPLE)
-    @JsonProperty(SpringDocConstant.DTO_USER_NAME)
+    @JsonProperty(DTOConstant.DTO_USER_NAME)
     private String name;
 
     @Email(message = SpringDocConstant.DTO_USER_MESSAGE_EMAIL)
-    @JsonProperty(SpringDocConstant.DTO_USER_EMAIL)
+    @JsonProperty(DTOConstant.DTO_USER_EMAIL)
     private String email;
 
     @Min(value = 18, message = SpringDocConstant.DTO_USER_MESSAGE_AGE)
-    @JsonProperty(SpringDocConstant.DTO_USER_AGE)
+    @JsonProperty(DTOConstant.DTO_USER_AGE)
     private int age;
 }

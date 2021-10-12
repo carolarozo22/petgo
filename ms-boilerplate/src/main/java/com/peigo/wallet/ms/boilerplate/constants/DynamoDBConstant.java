@@ -2,9 +2,8 @@ package com.peigo.wallet.ms.boilerplate.constants;
 
 public class DynamoDBConstant {
 
-    private DynamoDBConstant(){
+    private DynamoDBConstant(){}
 
-    }
     /**
      * Tabla usuarios
      */

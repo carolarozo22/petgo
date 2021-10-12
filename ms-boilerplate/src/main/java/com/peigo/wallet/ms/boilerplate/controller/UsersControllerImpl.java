@@ -1,6 +1,6 @@
 package com.peigo.wallet.ms.boilerplate.controller;
 
-import com.peigo.wallet.ms.boilerplate.dto.UserDTO;
+import com.peigo.wallet.dto.users.UserDTO;
 import com.peigo.wallet.ms.boilerplate.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

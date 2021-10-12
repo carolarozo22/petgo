@@ -24,19 +24,4 @@ public class SpringDocConstant {
     public static final String CONTROLLER_USER_TAG_NAME = "Controlador de usuarios";
     public static final String CONTROLLER_USER_TAG_DESCRIPTION = "Procesar información de usuarios";
     public static final String CONTROLLER_USER_FIND_USER_SUMMARY = "Metodo que busca usuario";
-
-    /**
-     * Variables DTO Usuarios
-     */
-    public static final String DTO_USER_SCHEMA_NAME = "DTO usuario";
-    public static final String DTO_USER_SCHEMA_DESCRIPTION = "DTO para procesar la información del usuario";
-    public static final String DTO_USER_MESSAGE_NAME = "Nombre vacío";
-    public static final String DTO_USER_SCHEMA_NAME_DESCRIPTION = "Nombre del usuario";
-    public static final String DTO_USER_SCHEMA_NAME_EXAMPLE = "Erick";
-    public static final String DTO_USER_MESSAGE_EMAIL = "Formato de correo invalido";
-    public static final String DTO_USER_MESSAGE_AGE = "Persona no cumple con la edad minima requerida";
-    public static final String DTO_USER_NAME = "nombre";
-    public static final String DTO_USER_EMAIL = "email";
-    public static final String DTO_USER_AGE = "edad";
-
 }

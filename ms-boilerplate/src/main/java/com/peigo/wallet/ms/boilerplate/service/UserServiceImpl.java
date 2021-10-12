@@ -1,7 +1,7 @@
 package com.peigo.wallet.ms.boilerplate.service;
 
+import com.peigo.wallet.dto.users.UserDTO;
 import com.peigo.wallet.ms.boilerplate.constants.LogsConstant;
-import com.peigo.wallet.ms.boilerplate.dto.UserDTO;
 import com.peigo.wallet.ms.boilerplate.model.User;
 import com.peigo.wallet.ms.boilerplate.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
