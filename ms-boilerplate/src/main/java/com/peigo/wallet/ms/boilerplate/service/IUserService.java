@@ -1,7 +1,7 @@
 package com.peigo.wallet.ms.boilerplate.service;
 
 
-import com.peigo.wallet.ms.boilerplate.dto.request.UserDTO;
+import com.peigo.wallet.ms.boilerplate.dto.UserDTO;
 
 import java.util.List;
 

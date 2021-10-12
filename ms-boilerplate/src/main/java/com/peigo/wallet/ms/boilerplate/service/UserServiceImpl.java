@@ -1,7 +1,7 @@
 package com.peigo.wallet.ms.boilerplate.service;
 
 import com.peigo.wallet.ms.boilerplate.constants.LogsConstant;
-import com.peigo.wallet.ms.boilerplate.dto.request.UserDTO;
+import com.peigo.wallet.ms.boilerplate.dto.UserDTO;
 import com.peigo.wallet.ms.boilerplate.model.User;
 import com.peigo.wallet.ms.boilerplate.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -24,7 +24,7 @@ public class UserServiceImpl implements  IUserService{
 
     @Override
     public UserDTO saveUser(UserDTO userDTO) {
-        log.info(LogsConstant.MENSAJE_INGRESO_DATOS, 1, userDTO);
+        log.info(LogsConstant.MESSAGE_INPUT_DATA, 1, userDTO);
         User user = modelMapper.map(userDTO, User.class);
         userRepository.saveUser(user);
         return userDTO;

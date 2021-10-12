@@ -1,4 +1,4 @@
-package com.peigo.wallet.ms.boilerplate.dto.request;
+package com.peigo.wallet.ms.boilerplate.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.peigo.wallet.ms.boilerplate.constants.SpringDocConstant;
