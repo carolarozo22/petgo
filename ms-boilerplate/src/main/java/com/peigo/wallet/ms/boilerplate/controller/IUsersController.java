@@ -2,7 +2,7 @@ package com.peigo.wallet.ms.boilerplate.controller;
 
 import com.peigo.wallet.ms.boilerplate.constants.ControllerConstants;
 import com.peigo.wallet.ms.boilerplate.constants.SpringDocConstant;
-import com.peigo.wallet.ms.boilerplate.dto.request.UserDTO;
+import com.peigo.wallet.ms.boilerplate.dto.UserDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
