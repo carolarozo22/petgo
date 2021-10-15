@@ -3,7 +3,7 @@ package com.peigo.wallet.ms.boilerplate.controller;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.peigo.wallet.ms.boilerplate.dto.UserDTO;
+import com.peigo.wallet.dto.users.UserDTO;
 import com.peigo.wallet.ms.boilerplate.service.UserServiceImpl;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

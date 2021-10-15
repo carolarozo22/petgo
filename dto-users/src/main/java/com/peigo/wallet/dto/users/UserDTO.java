@@ -6,6 +6,7 @@ import com.peigo.wallet.dto.users.constants.SpringDocConstant;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
@@ -29,4 +30,5 @@ public class UserDTO implements Serializable {
     @Min(value = 18, message = SpringDocConstant.DTO_USER_MESSAGE_AGE)
     @JsonProperty(DTOConstant.DTO_USER_AGE)
     private int age;
+
 }
