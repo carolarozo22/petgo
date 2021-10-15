@@ -1,14 +1,24 @@
-package controller;
+package controller
 
-import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
+import com.amazonaws.auth.AWSStaticCredentialsProvider
+import com.amazonaws.auth.BasicAWSCredentials
+import com.amazonaws.auth.InstanceProfileCredentialsProvider
+import com.amazonaws.client.builder.AwsClientBuilder
+import com.amazonaws.regions.Regions;
+import com.amazonaws.services.dynamodbv2.AmazonDynamoDB
+import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.peigo.wallet.dto.users.UserDTO
-import com.peigo.wallet.ms.boilerplate.controller.UsersControllerImpl;
+import com.peigo.wallet.ms.boilerplate.controller.IUsersController
+import com.peigo.wallet.ms.boilerplate.controller.UsersControllerImpl
+import com.peigo.wallet.ms.boilerplate.repository.UserRepository
+import com.peigo.wallet.ms.boilerplate.service.IUserService;
 import com.peigo.wallet.ms.boilerplate.service.UserServiceImpl
 import org.junit.internal.runners.rules.ValidationError;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Test
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -17,7 +27,8 @@ import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.context.annotation.Bean
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
+import org.springframework.http.MediaType
+import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
@@ -35,24 +46,49 @@ class UsersControllerTest extends IntegrationTestConfiguration {
 
     private MockMvc mockMvc;
 
-    @MockBean
-    private AmazonDynamoDB amazonDynamoDB;
+    @Autowired
+    AmazonDynamoDB amazonDynamoDB;
+
+    @Autowired
+    UserRepository userRepository;
+
+    @Autowired
+    IUserService userServiceImpl;
 
     @MockBean
-    private UserServiceImpl userServiceImpl;
+    UsersControllerImpl usersControllerImpl;
 
     @MockBean
-    private DynamoDBMapper dynamoDBMapper;
+    DynamoDBMapper dynamoDBMapper;
 
     @Autowired
     ValidationError validationError
 
     UserServiceImpl userService
 
+    ModelMapper modelMapper;
+
 
     def setup() {
-        mockMvc = MockMvcBuilders.standaloneSetup(new UsersControllerImpl())
-                .build()
+        usersControllerImpl = new UsersControllerImpl()
+        userService = new UserServiceImpl()
+        modelMapper = new ModelMapper()
+        userRepository = new UserRepository();
+        amazonDynamoDB = AmazonDynamoDBClientBuilder
+                            .standard()
+                            .withRegion(Regions.AP_EAST_1)
+                            .withCredentials(new InstanceProfileCredentialsProvider(false))
+                            .build();
+        dynamoDBMapper = new DynamoDBMapper(amazonDynamoDB)
+//        println(userServiceImpl)
+        //ReflectionTestUtils.setField(dynamoDBMapper, "amazonDynamoDB", amazonDynamoDB)
+//        ReflectionTestUtils.setField(userRepository, "dynamoDBMapper", dynamoDBMapper)
+//        ReflectionTestUtils.setField(userService, "userRepository", userRepository)
+//        ReflectionTestUtils.setField(userService, "modelMapper", modelMapper)
+        ReflectionTestUtils.setField(usersControllerImpl, "userServiceImpl", userService)
+
+        mockMvc = MockMvcBuilders.standaloneSetup(usersControllerImpl)
+                    .build()
     }
 
     def "Suma de 2 numeros"() {
@@ -81,36 +117,35 @@ class UsersControllerTest extends IntegrationTestConfiguration {
 
 
 
-//    def "Prueba de creación de usuario"() {
-//        given:
-//        def userDTO = UserDTO.builder()
-//                .age(20)
-//                .email("correo.prueba@gmail.com")
-//                .name("Erick Jimenez")
-//                .build();
-////        def userDTO = new UserDTO("Erick Jimenez2","correo.prueba@gmail.com",  20)
-//        println("Test Lisandro")
-//        println new ObjectMapper().writeValueAsString(userDTO)
-//        expect:
-//        mockMvc.perform(post("/createUser")
-//                .contentType(MediaType.APPLICATION_JSON_VALUE)
-//                .accept(MediaType.APPLICATION_JSON_VALUE)
-//                .content(new ObjectMapper().writeValueAsString(userDTO)))
-//                .andExpect(MockMvcResultMatchers.status().isOk());
-//
-//    }
-//    def "Prueba de consulta de usuarios"() {
-//        expect:
-//        doGet("/getUsers" )
-//                .andExpect(MockMvcResultMatchers.status().isOk())
-//                .andDo(MockMvcResultHandlers.print())
-//
-////        mockMvc.perform(get("/getUsers")
-////        .contentType(MediaType.APPLICATION_JSON_VALUE)
-////        .accept(MediaType.APPLICATION_JSON_VALUE))
-////        .andExpect(MockMvcResultMatchers.status().isOk());
-//
-//    }
+    def "Prueba de creación de usuario"() {
+        given:
+        def userDTO = UserDTO.builder()
+                .age(20)
+                .email("correo.prueba@gmail.com")
+                .name("Erick Jimenez")
+                .build();
+        println("Test Lisandro")
+        println new ObjectMapper().writeValueAsString(userDTO)
+        expect:
+        mockMvc.perform(post("/createUser")
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .accept(MediaType.APPLICATION_JSON_VALUE)
+                .content(new ObjectMapper().writeValueAsString(userDTO)))
+                .andExpect(MockMvcResultMatchers.status().isOk());
+
+    }
+    def "Prueba de consulta de usuarios"() {
+        expect:
+        doGet("/getUsers" )
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andDo(MockMvcResultHandlers.print())
+
+//        mockMvc.perform(get("/getUsers")
+//        .contentType(MediaType.APPLICATION_JSON_VALUE)
+//        .accept(MediaType.APPLICATION_JSON_VALUE))
+//        .andExpect(MockMvcResultMatchers.status().isOk());
+
+    }
 //
 //    @Test
 //    @DisplayName("Prueba de creación de usuario")
@@ -138,29 +173,21 @@ class UsersControllerTest extends IntegrationTestConfiguration {
 
     private doGet(String url) {
         mockMvc.perform(
-                MockMvcRequestBuilders.get(url)
+                get(url)
                         .header("X-TenantId", "CLARIN")
                         .contentType(MediaType.APPLICATION_JSON)
         )
     }
     private doPost(String url, String body) {
         mockMvc.perform(
-                MockMvcRequestBuilders.post(url)
+                post(url)
                         .header("X-TenantId", "CLARIN")
                 .content(body)
                         .contentType(MediaType.APPLICATION_JSON)
         )
     }
 
-    @TestConfiguration
-    static class MockConfig {
-        def detachedMockFactory = new DetachedMockFactory()
 
-        @Bean
-        UserServiceImpl getUsersService() {
-            return detachedMockFactory.Stub(UserServiceImpl)
-        }
-    }
 
     def suma(int a, int b) {
         return a + b

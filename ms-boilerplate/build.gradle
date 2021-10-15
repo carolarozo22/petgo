@@ -59,7 +59,7 @@ dependencies {
 	testImplementation 'org.spockframework:spock-core:2.0-groovy-3.0'
 
 	// Implementación DTO
-	implementation(files("../dto-users/dto-users-0.0.1-SNAPSHOT-plain.jar"))
+	implementation(files("../dto-users/build/libs/dto-users-0.0.1-SNAPSHOT-plain.jar"))
 }
 
 test {
