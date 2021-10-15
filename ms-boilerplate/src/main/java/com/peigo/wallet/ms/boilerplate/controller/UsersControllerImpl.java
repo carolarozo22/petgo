@@ -2,6 +2,7 @@ package com.peigo.wallet.ms.boilerplate.controller;
 
 import com.peigo.wallet.dto.users.UserDTO;
 import com.peigo.wallet.ms.boilerplate.service.IUserService;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,7 +33,7 @@ public class UsersControllerImpl implements IUsersController{
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public Map<String, String> handleValidationExceptions(MethodArgumentNotValidException ex){
+    public Map<String, String> handleValidationExceptions(@NotNull MethodArgumentNotValidException ex){
         Map<String, String> errors = new HashMap<>();
         ex.getBindingResult().getAllErrors().forEach(error -> {
             String name = ((FieldError) error).getField();
