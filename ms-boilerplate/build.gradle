@@ -30,11 +30,6 @@ jacocoTestReport{
 	dependsOn test
 }
 
-configurations {
-	compileOnly {
-		extendsFrom annotationProcessor
-	}
-}
 
 repositories {
 	mavenCentral()
@@ -47,10 +42,23 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.mockito:mockito-junit-jupiter:4.0.0'
 	implementation 'org.springdoc:springdoc-openapi-ui:1.5.11'
+
+	// Dynamo
+	implementation 'io.github.boostchicken:spring-data-dynamodb:5.2.5'
+
+	// Validations
+	implementation 'com.github.damianwajser:spring-commons-rest-validation:1.13.4'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
-	implementation 'com.amazonaws:aws-java-sdk-dynamodb:1.12.83'
-	implementation 'com.github.derjust:spring-data-dynamodb:5.1.0'
-	implementation 'org.modelmapper:modelmapper:2.4.4'
+
+	// Handler Exception
+	implementation 'com.github.damianwajser:spring-commons-exception-handler:1.13.4'
+
+	// Logs
+	implementation 'com.github.damianwajser:spring-commons-logger:1.13.4'
+
+	// Mapper
+	implementation 'org.mapstruct:mapstruct:1.4.2.Final'
+	annotationProcessor 'org.mapstruct:mapstruct-processor:1.4.2.Final'
 }
 
 test {
