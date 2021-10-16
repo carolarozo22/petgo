@@ -1,44 +1,30 @@
 package com.peigo.wallet.ms.boilerplate.controller;
 
-import com.peigo.wallet.ms.boilerplate.dto.UserDTO;
-import com.peigo.wallet.ms.boilerplate.service.IUserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+import com.peigo.wallet.ms.boilerplate.model.dto.UserDTO;
+import com.peigo.wallet.ms.boilerplate.service.UserService;
+import lombok.AllArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.FieldError;
-import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.Map;
+import javax.validation.Valid;
 
 @RestController
+@AllArgsConstructor
+@RequestMapping("/api/boilerplate")
 public class UsersControllerImpl implements IUsersController{
 
-    @Autowired
-    private IUserService userServiceImpl;
+    private final UserService userService;
 
     @Override
-    public ResponseEntity createUser(UserDTO userDTO) {
-        return ResponseEntity.ok(userServiceImpl.saveUser(userDTO));
+    @PostMapping(value = "/createUser", produces = {MediaType.APPLICATION_JSON_VALUE})
+    public ResponseEntity createUser(@Valid @RequestBody UserDTO userDTO) {
+        return ResponseEntity.ok(userService.saveUser(userDTO));
     }
 
     @Override
+    @GetMapping(value = "/getUsers", produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity getFindUser() {
-        return ResponseEntity.ok(userServiceImpl.getUsers());
-    }
-
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public Map<String, String> handleValidationExceptions(MethodArgumentNotValidException ex){
-        Map<String, String> errors = new HashMap<>();
-        ex.getBindingResult().getAllErrors().forEach(error -> {
-            String name = ((FieldError) error).getField();
-            String errorMessage = error.getDefaultMessage();
-            errors.put(name, errorMessage);
-        });
-        return errors;
+        return ResponseEntity.ok(userService.getUsers());
     }
 }
