@@ -59,6 +59,9 @@ dependencies {
 	// Mapper
 	implementation 'org.mapstruct:mapstruct:1.4.2.Final'
 	annotationProcessor 'org.mapstruct:mapstruct-processor:1.4.2.Final'
+
+	//ConfigServer
+	implementation 'org.springframework.cloud:spring-cloud-starter-config:3.0.5'
 }
 
 test {
