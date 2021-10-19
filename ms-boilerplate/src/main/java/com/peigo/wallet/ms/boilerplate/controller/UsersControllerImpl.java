@@ -2,7 +2,6 @@ package com.peigo.wallet.ms.boilerplate.controller;
 
 import com.peigo.wallet.dto.users.UserDTO;
 import com.peigo.wallet.ms.boilerplate.service.IUserService;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +11,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.constraints.NotNull;
 import java.util.HashMap;
 import java.util.Map;
 

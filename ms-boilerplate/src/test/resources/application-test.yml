@@ -1,0 +1,5 @@
+aws:
+  dyanmodb:
+    access-key: globant2021
+    secret-key: peigo
+    end-point: http://${test.server.sql-host}:${test.server.sql-port}

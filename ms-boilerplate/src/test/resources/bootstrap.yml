@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: api-loyalty-core
+  profiles:
+    active: test
+  datasource:
+    url: jdbc:sqlserver://${test.server.sql-host}:${test.server.sql-port};databaseName=Customer_Loyalty
+    username: sa
+    password: A_Str0ng_Required_Password
+    driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver
