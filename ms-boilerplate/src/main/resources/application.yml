@@ -1,0 +1,23 @@
+server:
+    port: 8080
+spring:
+    main:
+        allow-bean-definition-overriding: true
+    config:
+        import: configserver:http://localhost:8888
+    commons:
+        logger:
+            app:
+                name: ms-boilerplate
+            duration:
+                request:
+                    enabled: true
+            payload:
+                max:16000
+    output:
+        ansi:
+            enabled: ALWAYS
+
+logging:
+    pattern:
+        level: "[%-5level] AppName: %X{appName} Request ID: %X{requestId} Client IP: %X{clientIp}"
