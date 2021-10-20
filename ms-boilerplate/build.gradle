@@ -62,6 +62,9 @@ dependencies {
 
 	//ConfigServer
 	implementation 'org.springframework.cloud:spring-cloud-starter-config:3.0.5'
+
+	//RestTemplate
+	implementation 'com.github.damianwajser:spring-commons-rest-templates:1.13.4'
 }
 
 test {
