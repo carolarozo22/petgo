@@ -10,8 +10,8 @@ springdoc:
 aws:
   dynamodb:
     secret-key: peigo
-    access-key: Globant2021
-    end-point: http://localhost:8000/
+    access-key: Globant0001
+    end-point: http://localhost:8003/
 
 spring:
   main:
