@@ -35,6 +35,8 @@ repositories {
 	mavenCentral()
 }
 
+apply plugin: 'groovy'
+
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	compileOnly 'org.projectlombok:lombok'
@@ -45,6 +47,7 @@ dependencies {
 
 	// Dynamo
 	implementation 'io.github.boostchicken:spring-data-dynamodb:5.2.5'
+	implementation 'software.amazon.awssdk:dynamodb:2.17.62'
 
 	// Validations
 	implementation 'com.github.damianwajser:spring-commons-rest-validation:1.13.4'
@@ -62,6 +65,16 @@ dependencies {
 
 	//ConfigServer
 	implementation 'org.springframework.cloud:spring-cloud-starter-config:3.0.5'
+
+	//Groovy - Spock
+	implementation 'org.codehaus.groovy:groovy-all:3.0.9'
+	implementation 'org.springframework.boot:spring-boot-starter-groovy-templates:2.5.5'
+	testImplementation 'org.spockframework:spock-core:2.0-groovy-3.0'
+
+	//Testcontainers
+	testImplementation "org.testcontainers:spock:1.16.0"
+
+
 }
 
 test {
