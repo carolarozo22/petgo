@@ -27,4 +27,16 @@ public class UsersControllerImpl implements IUsersController{
     public ResponseEntity getFindUser() {
         return ResponseEntity.ok(userService.getUsers());
     }
+
+    @Override
+    @GetMapping(value = "/getHeaders", produces = {MediaType.APPLICATION_JSON_VALUE})
+    public ResponseEntity<Object> getHeaders() {
+        return ResponseEntity.ok(userService.getHeaders());
+    }
+
+    @Override
+    @GetMapping(value = "/getHeadersSnake", produces = {MediaType.APPLICATION_JSON_VALUE})
+    public ResponseEntity<Object> getHeadersSnake() {
+        return ResponseEntity.ok(userService.getObjectHeadersSnake());
+    }
 }

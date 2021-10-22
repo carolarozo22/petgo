@@ -33,4 +33,8 @@ public interface IUsersController {
             @ApiResponse(responseCode = CodeConstant.RESPONSE_CODE_BAD_REQUEST, description = CodeConstant.RESPONSE_TEXT_BAD_REQUEST, content = @Content)
     })
     ResponseEntity<List<UserDTO>> getFindUser();
+
+    ResponseEntity<Object> getHeaders();
+
+    ResponseEntity<Object> getHeadersSnake();
 }

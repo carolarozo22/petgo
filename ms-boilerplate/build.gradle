@@ -66,6 +66,9 @@ dependencies {
 	//ConfigServer
 	implementation 'org.springframework.cloud:spring-cloud-starter-config:3.0.5'
 
+	//RestTemplate
+	implementation 'com.github.damianwajser:spring-commons-rest-templates:1.13.4'
+  
 	//Groovy - Spock
 	implementation 'org.codehaus.groovy:groovy-all:3.0.9'
 	implementation 'org.springframework.boot:spring-boot-starter-groovy-templates:2.5.5'
@@ -73,8 +76,6 @@ dependencies {
 
 	//Testcontainers
 	testImplementation "org.testcontainers:spock:1.16.0"
-
-
 }
 
 test {
