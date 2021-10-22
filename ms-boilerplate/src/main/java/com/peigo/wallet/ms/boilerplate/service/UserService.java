@@ -6,7 +6,9 @@ import com.peigo.wallet.ms.boilerplate.model.mapper.UserMapper;
 import com.peigo.wallet.ms.boilerplate.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,6 +19,9 @@ import java.util.stream.Collectors;
 public class UserService {
 
     private final UserRepository userRepository;
+
+    @Qualifier("snake_template")
+    private final RestTemplate restTemplateSnake;
 
     public UserDTO saveUser(UserDTO userDTO) {
         log.info("New user to register: {}", userDTO);
@@ -37,5 +42,14 @@ public class UserService {
                 .collect(Collectors.toList());
         log.info("List users: {}", userDTOList);
         return userDTOList;
+    }
+
+    public Object getHeaders(){
+        RestTemplate restTemplate = new RestTemplate();
+        return restTemplate.getForObject("https://httpbin.org/get", Object.class);
+    }
+
+    public Object getObjectHeadersSnake(){
+        return restTemplateSnake.getForObject("https://httpbin.org/get", Object.class);
     }
 }

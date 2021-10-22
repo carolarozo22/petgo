@@ -13,5 +13,4 @@ public class MsBoilerplateApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(MsBoilerplateApplication.class, args);
 	}
-
 }
