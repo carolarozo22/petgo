@@ -7,6 +7,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 @EnableAutoConfiguration
+@EnableCaching
 @ComponentScan(basePackages = {"com.github.damianwajser","com.peigo.wallet.ms.boilerplate"})
 public class MsBoilerplateApplication {
 
