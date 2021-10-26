@@ -23,6 +23,7 @@ public class UserService {
     @Qualifier("snake_template")
     private final RestTemplate restTemplateSnake;
 
+    @Cacheable(value = "new_user")
     public UserDTO saveUser(UserDTO userDTO) {
         log.info("New user to register: {}", userDTO);
         UserEntity userEntity = UserMapper.INSTANCE.toEntity(userDTO);
@@ -32,6 +33,7 @@ public class UserService {
         return userDTO;
     }
 
+    @Cacheable("all_users")
     public List<UserDTO> getUsers() {
         log.info("consult information of all users");
         List<UserEntity> userList = (List<UserEntity>) userRepository.findAll();
