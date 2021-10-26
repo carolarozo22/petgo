@@ -34,6 +34,8 @@ public interface IUsersController {
     })
     ResponseEntity<List<UserDTO>> getFindUser();
 
+    ResponseEntity<String> deleteUser();
+
     ResponseEntity<Object> getHeaders();
 
     ResponseEntity<Object> getHeadersSnake();

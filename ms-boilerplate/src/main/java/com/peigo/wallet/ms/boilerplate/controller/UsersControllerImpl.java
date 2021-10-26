@@ -3,6 +3,7 @@ package com.peigo.wallet.ms.boilerplate.controller;
 import com.peigo.wallet.ms.boilerplate.model.dto.UserDTO;
 import com.peigo.wallet.ms.boilerplate.service.UserService;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +13,7 @@ import javax.validation.Valid;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/api/boilerplate")
+@Slf4j
 public class UsersControllerImpl implements IUsersController{
 
     private final UserService userService;
@@ -25,7 +27,15 @@ public class UsersControllerImpl implements IUsersController{
     @Override
     @GetMapping(value = "/getUsers", produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity getFindUser() {
+        log.info("Buscando usuario");
         return ResponseEntity.ok(userService.getUsers());
+    }
+
+    @Override
+    @DeleteMapping(value = "/deleteUser", produces = {MediaType.APPLICATION_JSON_VALUE})
+    public ResponseEntity<String> deleteUser() {
+        userService.deleteUser();
+        return ResponseEntity.ok("Ok");
     }
 
     @Override

@@ -4,7 +4,14 @@ spring:
     main:
         allow-bean-definition-overriding: true
     config:
-        import: configserver:http://localhost:8888
+        import: "configserver:"
+    cloud:
+        config:
+            name: ms-boilerplate
+            uri: http://localhost:8888
+            username: root
+            password: s3cr3t
+            fail-fast: true
     commons:
         logger:
             app:
@@ -14,6 +21,8 @@ spring:
                     enabled: true
             payload:
                 max:16000
+        idempotency:
+            enabled: true
     output:
         ansi:
             enabled: ALWAYS

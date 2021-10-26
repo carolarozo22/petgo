@@ -6,5 +6,10 @@ spring:
       server:
         native:
           search-locations: classpath:/common-config
+  security:
+    user:
+      name: root
+      password: s3cr3t
+
 server:
   port: 8888

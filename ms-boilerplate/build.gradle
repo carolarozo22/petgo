@@ -81,6 +81,9 @@ dependencies {
 	implementation 'com.github.damianwajser:spring-commons-cache:1.13.4'
 	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
 	implementation 'redis.clients:jedis:3.7.0'
+
+	//Idempotency
+	implementation 'com.github.damianwajser:spring-commons-idempotency:1.13.4'
 }
 
 test {

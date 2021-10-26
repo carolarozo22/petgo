@@ -4,12 +4,9 @@ import com.peigo.wallet.ms.boilerplate.model.dto.UserDTO;
 import com.peigo.wallet.ms.boilerplate.model.entity.UserEntity;
 
 import org.mapstruct.*;
-import org.mapstruct.factory.Mappers;
 
 @Mapper
 public interface UserMapper {
-
-    UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
 
     @Mappings({
         @Mapping(target = "id", ignore = true),
