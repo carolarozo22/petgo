@@ -76,6 +76,11 @@ dependencies {
 
 	//Testcontainers
 	testImplementation "org.testcontainers:spock:1.16.0"
+	
+	//Cache
+	implementation 'com.github.damianwajser:spring-commons-cache:1.13.4'
+	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+	implementation 'redis.clients:jedis:3.7.0'
 }
 
 test {
