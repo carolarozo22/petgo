@@ -53,3 +53,12 @@ Consultar registros de toda la tabla:
 aws dynamodb scan --table-name users --endpoint-url http://localhost:8000
 ```
 
+## Cache - Redis
+1.  Imagen de descarga de docker para creación de contenedor:
+    ```sh
+    docker pull redis
+    ```
+1.  Imagen de descarga de docker para creación de contenedor:
+    ```sh
+    docker run --name myRedis -p 6379:6379 -d redis
+    ```
