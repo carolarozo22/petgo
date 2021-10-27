@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: ms-boilerplate
+  profiles:
+    active: test
