@@ -5,6 +5,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.annotation.DirtiesContext
 import org.testcontainers.containers.GenericContainer
+import org.testcontainers.spock.Testcontainers
 import software.amazon.awssdk.auth.credentials.AwsBasicCredentials
 import software.amazon.awssdk.core.waiters.WaiterResponse
 import software.amazon.awssdk.regions.Region
@@ -20,24 +21,34 @@ import java.util.concurrent.CompletableFuture
 @SpringBootTest
 @AutoConfigureMockMvc
 @DirtiesContext
+@Testcontainers
 abstract class IntegrationTestConfiguration extends Specification {
+
     private static final int DYNAMODB_PORT = 8000
-    public static final String AWS_ACCESS_KEY_ID = "peigo"
-    public static final String AWS_SECRET_KEY_ID = "Globant2021"
+    private static final String AWS_ACCESS_KEY_ID = "Globant2022"
+    private static final String AWS_SECRET_KEY_ID = "peigo"
+    private static final int REDIS_PORT = 6379
 
-    public static DynamoDbAsyncClient asyncClient
-
+    private static DynamoDbAsyncClient asyncClient
 
     public static GenericContainer dynamodbContainer = new GenericContainer<>("amazon/dynamodb-local:latest")
             .withCommand("-jar DynamoDBLocal.jar -inMemory -sharedDb")
             .withExposedPorts(DYNAMODB_PORT)
 
+    public static GenericContainer redisContainer = new GenericContainer<>("redis:6.0")
+            .withExposedPorts(REDIS_PORT)
+
     static {
 
         dynamodbContainer.start()
+        redisContainer.start()
 
-        System.setProperty("test.server.sql-host", "${dynamodbContainer.host}")
-        System.setProperty("test.server.sql-port", "${dynamodbContainer.firstMappedPort}")
+        System.setProperty("test.server.dynamo-host", "${dynamodbContainer.host}")
+        System.setProperty("test.server.dynamo-port", "${dynamodbContainer.firstMappedPort}")
+        System.setProperty("dynamo.access-key", "${AWS_ACCESS_KEY_ID}")
+        System.setProperty("dynamo.secret-key", "${AWS_SECRET_KEY_ID}")
+        System.setProperty("test.server.redis-host", "${redisContainer.host}")
+        System.setProperty("test.server.redis-port", "${redisContainer.firstMappedPort}")
 
         asyncClient = DynamoDbAsyncClient
                 .builder()
@@ -52,11 +63,11 @@ abstract class IntegrationTestConfiguration extends Specification {
     }
 
 
-    static String buildEndpointUrl() {
+    private static String buildEndpointUrl() {
         return "http://" + dynamodbContainer.host + ":"  + dynamodbContainer.firstMappedPort
     }
 
-    static String createTableAsync(String tableName) {
+    private static String createTableAsync(String tableName) {
         String tableNameResult = ""
         CreateTableRequest createTableRequest = CreateTableRequest
                 .builder()
@@ -115,7 +126,7 @@ abstract class IntegrationTestConfiguration extends Specification {
         return tableNameResult
     }
 
-    static String createTable(DynamoDbClient ddb, String tableName, String key) {
+    private static String createTable(DynamoDbClient ddb, String tableName, String key) {
 
         DynamoDbWaiter dbWaiter = ddb.waiter()
         CreateTableRequest request = CreateTableRequest
@@ -167,7 +178,7 @@ abstract class IntegrationTestConfiguration extends Specification {
     }
 
 
-    static void createTableUsers() {
+    private static void createTableUsers() {
         DynamoDbClient ddb = DynamoDbClient.builder()
                 .region(Region.US_EAST_1)
                 .endpointOverride(URI.create(buildEndpointUrl()))

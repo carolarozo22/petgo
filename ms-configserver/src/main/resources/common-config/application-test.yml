@@ -1,0 +1,11 @@
+aws:
+  dynamodb:
+    secret-key: ${dynamo.secret-key}
+    access-key: ${dynamo.access-key}
+    end-point: http://${test.server.dynamo-host}:${test.server.dynamo-port}/
+
+spring:
+  redis:
+    host: ${test.server.redis-host}
+    port: ${test.server.redis-port}
+    timeout: 60000

@@ -20,7 +20,7 @@ spring:
                 request:
                     enabled: true
             payload:
-                max:16000
+                max: 16000
         idempotency:
             enabled: true
     output:

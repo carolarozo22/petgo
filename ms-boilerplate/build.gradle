@@ -7,8 +7,12 @@ plugins {
 	id 'groovy'
 }
 
-group = 'com.peigo.wallet.ms'
-version = '0.0.1-SNAPSHOT'
+def app = [
+		group:'com.peigo.wallet.ms',
+		version: '0.0.1'
+]
+group = app.group
+version = app.version
 sourceCompatibility = '11'
 
 sonarqube {

@@ -1,6 +1,5 @@
 package com.peigo.wallet.ms.boilerplate.infraestructure.config;
 
-import com.github.damianwajser.filter.StatsFilter;
 import com.github.damianwajser.idempotency.configuration.IdempotencyEndpoints;
 import com.peigo.wallet.ms.boilerplate.infraestructure.filter.IdempotencyKeyGeneratorFilter;
 import org.springframework.context.annotation.Bean;
