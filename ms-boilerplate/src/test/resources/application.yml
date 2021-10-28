@@ -1,21 +1,18 @@
 server:
   port: 8083
 
-springdoc:
-  swagger-ui:
-    path: /documentacion.html
-  api-docs:
-    path: /api-docs
-
-aws:
-  dynamodb:
-    secret-key: peigo
-    access-key: Globant2021
-    end-point: http://${test.server.sql-host}:${test.server.sql-port}/
-
 spring:
   main:
     allow-bean-definition-overriding: true
+  config:
+    import: "configserver:"
+  cloud:
+    config:
+      name: ms-boilerplate
+      uri: http://localhost:8888
+      username: root
+      password: s3cr3t
+      fail-fast: true
   commons:
     logger:
       app:
@@ -24,7 +21,9 @@ spring:
         request:
           enabled: true
       payload:
-        max:16000
+        max: 16000
+    idempotency:
+      enabled: false
   output:
     ansi:
       enabled: ALWAYS
