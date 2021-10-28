@@ -176,7 +176,7 @@ abstract class IntegrationTestConfiguration extends Specification {
                 )
                 .build()
 
-        createTable(ddb, "users", "id")
+        createTable(ddb, "Users", "id")
 
         ddb.close()
     }

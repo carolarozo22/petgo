@@ -33,6 +33,21 @@ public class UserDTO implements Serializable{
     @Schema(description = "User name not empty", example = "Erick")
     private String name;
 
+    @JsonProperty("documentNumber")
+    @NotEmpty(message = "{validation.notEmpty.message}", businessCode = CodeConstant.VALIDATION_CODE_NOT_EMPTY)
+    @Schema(description = "Document Number not empty", example = "1234567890")
+    private String documentNumber;
+
+    @JsonProperty("mobile")
+    @NotEmpty(message = "{validation.notEmpty.message}", businessCode = CodeConstant.VALIDATION_CODE_NOT_EMPTY)
+    @Schema(description = "Mobile not empty", example = "30030030000")
+    private long mobile;
+
+    @JsonProperty("password")
+    @NotEmpty(message = "{validation.notEmpty.message}", businessCode = CodeConstant.VALIDATION_CODE_NOT_EMPTY)
+    @Schema(description = "User name not empty", example = "Abc123$$$.")
+    private String password;
+
     @JsonProperty("email")
     @Email(message = "{validation.email.message}", businessCode = CodeConstant.VALIDATION_CODE_NOT_EMAIL_FORMAT)
     @Schema(description = "Validate the user email", example = "peigo@globant.com")

@@ -30,18 +30,43 @@ class UsersControllerSpec extends IntegrationTestConfiguration {
             dynamodbContainer.isRunning()
     }
 
-    def "Create User"() {
+    def "Create User With DTO"() {
         given:
             def userDTO = UserDTO.builder()
-                    .age(20)
+                    .documentNumber("1234567890")
                     .email("correo.prueba@gmail.com")
+                    .mobile(3003003000)
+                    .password("123")
                     .name("Erick Jimenez")
+                    .age(20)
                     .build()
         expect:
             mockMvc.perform(post("/api/boilerplate/createUser")
                     .contentType(MediaType.APPLICATION_JSON_VALUE)
                     .accept(MediaType.APPLICATION_JSON_VALUE)
                     .content(new ObjectMapper().writeValueAsString(userDTO)))
+                    .andExpect(MockMvcResultMatchers.status().isOk())
+                    .andDo(MockMvcResultHandlers.print())
+    }
+
+    def "Create User With JSON"() {
+        given:
+            def testUser = """
+                                    {
+                                        "documentNumber": "71234234",
+                                        "mobile": 3003003001,
+                                        "password": "321",
+                                        "name": "Lisandro Gómez",
+                                        "age": 38,
+                                        "email": "correo.prueba@globant.com"
+                                    }
+                                
+                                """
+        expect:
+            mockMvc.perform(post("/api/boilerplate/createUser")
+                    .contentType(MediaType.APPLICATION_JSON_VALUE)
+                    .accept(MediaType.APPLICATION_JSON_VALUE)
+                    .content(testUser))
                     .andExpect(MockMvcResultMatchers.status().isOk())
                     .andDo(MockMvcResultHandlers.print())
     }
